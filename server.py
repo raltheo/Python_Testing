@@ -8,6 +8,7 @@ def loadClubs():
          return listOfClubs
 
 
+
 def loadCompetitions():
     with open('competitions.json') as comps:
          listOfCompetitions = json.load(comps)['competitions']
