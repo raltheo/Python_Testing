@@ -48,6 +48,9 @@ def purchasePlaces():
     if not competition:return abort(404) #added prevent crash
     club = [c for c in clubs if c['name'] == request.form['club']]
     if not club: return abort(404) #added prevent crash
+    if datetime.strptime(competition[0]["date"], "%Y-%m-%d %H:%M:%S") < datetime.now():
+        flash('Can\'t buy, the competion has ended!')#added for issue 5
+        return render_template('welcome.html', club=club[0], competitions=competitions)
     placesRequired = int(request.form['places'])
     pointsclub = int(club[0]["points"]) #added for issue 2
     if pointsclub < placesRequired or placesRequired > 12: #added for issue 2

@@ -10,3 +10,10 @@ def test_buying_place_past_competition(client):
     response = client.post('/purchasePlaces', data={"club": club, "competition" : competition, "places" : places})
 
     assert 'Great-booking complete!' not in response.data.decode()
+
+    club = "Simply Lift"
+    competition= "Testing"
+    places = 1
+    response = client.post('/purchasePlaces', data={"club": club, "competition" : competition, "places" : places})
+
+    assert 'Great-booking complete!' in response.data.decode()
