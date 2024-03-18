@@ -46,16 +46,24 @@ def book(competition,club):
 def purchasePlaces():
     competition = [c for c in competitions if c['name'] == request.form['competition']]
     if not competition:return abort(404) #added prevent crash
+
     club = [c for c in clubs if c['name'] == request.form['club']]
     if not club: return abort(404) #added prevent crash
+
     if datetime.strptime(competition[0]["date"], "%Y-%m-%d %H:%M:%S") < datetime.now():
         flash('Can\'t buy, the competion has ended!')#added for issue 5
         return render_template('welcome.html', club=club[0], competitions=competitions)
+    
     placesRequired = int(request.form['places'])
+    if placesRequired > int(competition[0]["numberOfPlaces"]):
+        flash('Can\'t buy more than available places!')
+        return render_template('welcome.html', club=club[0], competitions=competitions)
+    
     pointsclub = int(club[0]["points"]) #added for issue 2
     if pointsclub < placesRequired or placesRequired > 12: #added for issue 2  and issue 4
         flash('Can\'t buy more than your points or more than 12 places!')#added for issue 2  and issue 4
         return render_template('welcome.html', club=club[0], competitions=competitions)#added for issue 2
+    
     competition[0]['numberOfPlaces'] = int(competition[0]['numberOfPlaces'])-placesRequired
     club[0]["points"] = int(club[0]["points"])-placesRequired#issue 6
     flash('Great-booking complete!')
