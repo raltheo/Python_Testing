@@ -13,5 +13,10 @@
         <button type="submit">Enter</button>
     </form>
     <a href="/displayclubs">See clubs</a>
+    {% if show_alert %}
+        <script>
+            alert("Unknow email !");
+        </script>
+    {% endif %}
 </body>
 </html>
