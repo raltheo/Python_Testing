@@ -1,0 +1,10 @@
+ajouter limitation d'achat dans le front => fais
+sortir tableau points de welcome et crée une nouvel page accessible a tous => fais
+
+crée test d'intégrations
+(et utilisé coverage)
+https://coverage.readthedocs.io/en/7.4.4/
+
+email crash change pour alert user et pas 404
+faire le readme
+faire la présentation
