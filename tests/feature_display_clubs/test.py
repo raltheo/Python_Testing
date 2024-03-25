@@ -5,6 +5,5 @@ def test_display_clubs(client):
     Feature for showing other clubs info
     #issue 7
     """
-    email = "john@simplylift.co"
-    response = client.post('/showSummary', data={"email": email})
-    assert "Other clubs" in response.data.decode()
+    response = client.get('/displayclubs')
+    assert "Clubs" in response.data.decode()
